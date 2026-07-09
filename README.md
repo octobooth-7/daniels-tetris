@@ -3,6 +3,8 @@
 ## CLI Tetris
 
 A lightweight terminal Tetris implementation with no external dependencies.
+- Board size: **14x20** (wider playfield)
+- Tetromino blocks are colorized by type in ANSI-capable terminals
 
 ### Run
 

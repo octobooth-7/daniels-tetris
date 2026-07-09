@@ -1,6 +1,17 @@
-const WIDTH = 10;
+const WIDTH = 14;
 const HEIGHT = 20;
 const TICK_MS = 450;
+const EMPTY = " ";
+const RESET = "\x1b[0m";
+const PIECE_COLORS = {
+  I: "\x1b[36m",
+  O: "\x1b[33m",
+  T: "\x1b[35m",
+  S: "\x1b[32m",
+  Z: "\x1b[31m",
+  J: "\x1b[34m",
+  L: "\x1b[91m"
+};
 
 const PIECES = {
   I: [
@@ -135,7 +146,7 @@ const PIECES = {
 
 const PIECE_TYPES = Object.keys(PIECES);
 
-const board = Array.from({ length: HEIGHT }, () => Array(WIDTH).fill(" "));
+const board = Array.from({ length: HEIGHT }, () => Array(WIDTH).fill(EMPTY));
 
 let score = 0;
 let gameOver = false;
@@ -152,7 +163,7 @@ function makePiece(type = randomPieceType()) {
   return {
     type,
     rotation: 0,
-    x: 3,
+    x: Math.floor(WIDTH / 2) - 2,
     y: -1
   };
 }
@@ -169,7 +180,7 @@ function collides(piece, x = piece.x, y = piece.y, rotation = piece.rotation) {
     if (cx < 0 || cx >= WIDTH || cy >= HEIGHT) {
       return true;
     }
-    return cy >= 0 && board[cy][cx] !== " ";
+    return cy >= 0 && board[cy][cx] !== EMPTY;
   });
 }
 
@@ -214,9 +225,9 @@ function lockPiece() {
 function clearLines() {
   let cleared = 0;
   for (let row = HEIGHT - 1; row >= 0; row -= 1) {
-    if (board[row].every((cell) => cell !== " ")) {
+    if (board[row].every((cell) => cell !== EMPTY)) {
       board.splice(row, 1);
-      board.unshift(Array(WIDTH).fill(" "));
+      board.unshift(Array(WIDTH).fill(EMPTY));
       cleared += 1;
       row += 1;
     }
@@ -261,15 +272,23 @@ function boardWithPiece() {
 
 function render() {
   const merged = boardWithPiece();
+  const border = `+${"-".repeat(WIDTH)}+\n`;
+  const renderCell = (cell) => {
+    if (cell === EMPTY) {
+      return " ";
+    }
+    const color = PIECE_COLORS[cell] || "";
+    return `${color}#${RESET}`;
+  };
   let output = "\x1b[2J\x1b[H";
   output += "CLI Tetris\n";
   output += `Score: ${score}\n`;
   output += `Board: ${WIDTH}x${HEIGHT}\n`;
-  output += "+----------+\n";
+  output += border;
   for (const row of merged) {
-    output += `|${row.map((cell) => (cell === " " ? " " : "#")).join("")}|\n`;
+    output += `|${row.map(renderCell).join("")}|\n`;
   }
-  output += "+----------+\n";
+  output += border;
   output += "Controls: a/Left=left  d/Right=right  s/Down=soft drop  w/Up=rotate\n";
   output += "          Space=hard drop  q=quit  Ctrl+C=quit\n";
   if (gameOver) {
