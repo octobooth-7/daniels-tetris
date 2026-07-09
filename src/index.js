@@ -3,6 +3,8 @@ const HEIGHT = 20;
 const TICK_MS = 450;
 const EMPTY = " ";
 const RESET = "\x1b[0m";
+const MUSIC_MS = 160;
+const MUSIC_PATTERN = [1, 0, 1, 0, 1, 0, 2, 0, 1, 0, 1, 0, 1, 0, 2, 0];
 const PIECE_COLORS = {
   I: "\x1b[36m",
   O: "\x1b[33m",
@@ -151,7 +153,10 @@ const board = Array.from({ length: HEIGHT }, () => Array(WIDTH).fill(EMPTY));
 let score = 0;
 let gameOver = false;
 let loopHandle = null;
+let musicHandle = null;
 let activePiece = null;
+let musicStep = 0;
+let musicMuted = false;
 const rawModeSupported =
   process.stdin.isTTY && typeof process.stdin.setRawMode === "function";
 
@@ -290,11 +295,29 @@ function render() {
   }
   output += border;
   output += "Controls: a/Left=left  d/Right=right  s/Down=soft drop  w/Up=rotate\n";
-  output += "          Space=hard drop  q=quit  Ctrl+C=quit\n";
+  output += "          Space=hard drop  m=music on/off  q=quit  Ctrl+C=quit\n";
+  output += `Music: ${musicMuted ? "Off" : "On"}\n`;
   if (gameOver) {
     output += "\nGAME OVER - press q or Ctrl+C to exit.\n";
   }
   process.stdout.write(output);
+}
+
+function playBell(times = 1) {
+  if (!rawModeSupported || musicMuted || gameOver) {
+    return;
+  }
+  for (let i = 0; i < times; i += 1) {
+    process.stdout.write("\x07");
+  }
+}
+
+function musicTick() {
+  const beat = MUSIC_PATTERN[musicStep % MUSIC_PATTERN.length];
+  musicStep += 1;
+  if (beat > 0) {
+    playBell(beat);
+  }
 }
 
 function tick() {
@@ -311,6 +334,9 @@ function tick() {
 function cleanupAndExit() {
   if (loopHandle) {
     clearInterval(loopHandle);
+  }
+  if (musicHandle) {
+    clearInterval(musicHandle);
   }
   if (rawModeSupported) {
     process.stdin.setRawMode(false);
@@ -341,6 +367,8 @@ function handleInput(buffer) {
     tryRotate();
   } else if (key === " ") {
     hardDrop();
+  } else if (key === "m") {
+    musicMuted = !musicMuted;
   }
 
   render();
@@ -366,6 +394,7 @@ function start() {
   process.stdin.on("data", handleInput);
 
   loopHandle = setInterval(tick, TICK_MS);
+  musicHandle = setInterval(musicTick, MUSIC_MS);
 }
 
 start();

@@ -19,4 +19,7 @@ npm start
 - `s` or `Down Arrow`: soft drop
 - `w` or `Up Arrow`: rotate
 - `Space`: hard drop
+- `m`: toggle music on/off
 - `q` or `Ctrl+C`: quit
+
+The game includes a lightweight terminal bell melody (no extra dependencies). If your terminal supports bell sounds, you will hear a simple looping tune during gameplay.
