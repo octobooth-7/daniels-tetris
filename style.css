@@ -1,0 +1,180 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #1a1a2e;
+  color: #eee;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#app {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+#game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+h1 {
+  font-size: 2rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #e94560;
+  text-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(20, 30px);
+  border: 2px solid #e94560;
+  background: #0f0f23;
+  box-shadow: 0 0 20px rgba(233, 69, 96, 0.3);
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #1a1a3e;
+}
+
+.cell.filled {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Tetromino colors */
+.cell.I { background: #00f0f0; box-shadow: inset 0 0 8px rgba(0,240,240,0.5); }
+.cell.O { background: #f0f000; box-shadow: inset 0 0 8px rgba(240,240,0,0.5); }
+.cell.T { background: #a000f0; box-shadow: inset 0 0 8px rgba(160,0,240,0.5); }
+.cell.S { background: #00f000; box-shadow: inset 0 0 8px rgba(0,240,0,0.5); }
+.cell.Z { background: #f00000; box-shadow: inset 0 0 8px rgba(240,0,0,0.5); }
+.cell.J { background: #0000f0; box-shadow: inset 0 0 8px rgba(0,0,240,0.5); }
+.cell.L { background: #f0a000; box-shadow: inset 0 0 8px rgba(240,160,0,0.5); }
+
+.cell.ghost {
+  opacity: 0.2;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+#controls {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid #e94560;
+  background: transparent;
+  color: #e94560;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background: #e94560;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 160px;
+}
+
+.panel {
+  background: #16213e;
+  border: 1px solid #0f3460;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.panel h2 {
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.panel .value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #e94560;
+}
+
+#next-canvas {
+  display: block;
+  margin-top: 8px;
+  background: #0f0f23;
+  border: 1px solid #0f3460;
+  border-radius: 4px;
+}
+
+#keys-help {
+  font-size: 0.78rem;
+  line-height: 1.8;
+  color: #aaa;
+}
+
+#keys-help span {
+  color: #e94560;
+  font-weight: bold;
+}
+
+#message-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(15, 15, 35, 0.95);
+  border: 2px solid #e94560;
+  border-radius: 8px;
+  padding: 32px 48px;
+  text-align: center;
+  display: none;
+}
+
+#message-overlay.visible {
+  display: block;
+}
+
+#message-overlay h2 {
+  font-size: 2rem;
+  color: #e94560;
+  margin-bottom: 12px;
+}
+
+#message-overlay p {
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+#board-wrapper {
+  position: relative;
+}
+
+#pause-indicator {
+  font-size: 0.9rem;
+  color: #888;
+  letter-spacing: 1px;
+  min-height: 1.2em;
+}
