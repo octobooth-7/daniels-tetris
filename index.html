@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tetris</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <div id="game-area">
+      <h1>Tetris</h1>
+
+      <div id="board-wrapper">
+        <div id="board" aria-label="Game board"></div>
+
+        <div id="message-overlay" role="dialog" aria-modal="true">
+          <h2 id="message-title">TETRIS</h2>
+          <p id="message-text">Use arrow keys to play. Space = hard drop.</p>
+          <button id="message-btn">Start Game</button>
+        </div>
+      </div>
+
+      <div id="controls">
+        <button id="start-btn">New Game</button>
+        <button id="pause-btn">Pause</button>
+      </div>
+
+      <div id="pause-indicator" aria-live="polite"></div>
+    </div>
+
+    <div id="sidebar">
+      <div class="panel">
+        <h2>Score</h2>
+        <div class="value" id="score">0</div>
+      </div>
+
+      <div class="panel">
+        <h2>Lines</h2>
+        <div class="value" id="lines">0</div>
+      </div>
+
+      <div class="panel">
+        <h2>Level</h2>
+        <div class="value" id="level">1</div>
+      </div>
+
+      <div class="panel">
+        <h2>Next</h2>
+        <canvas id="next-canvas" width="120" height="120"></canvas>
+      </div>
+
+      <div class="panel" id="keys-help">
+        <h2>Controls</h2>
+        <span>←→</span> Move<br/>
+        <span>↑</span> Rotate<br/>
+        <span>↓</span> Soft Drop<br/>
+        <span>Space</span> Hard Drop<br/>
+        <span>P</span> Pause
+      </div>
+    </div>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
