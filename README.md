@@ -1,16 +1,19 @@
 # danielsrepo1
 
-## CLI Tetris
+## UI Tetris
 
-A lightweight terminal Tetris implementation with no external dependencies.
+A lightweight browser-based Tetris implementation with no external dependencies.
 - Board size: **14x20** (wider playfield)
-- Tetromino blocks are colorized by type in ANSI-capable terminals
+- Tetromino blocks are colorized by type
+- Includes a simple built-in music loop (toggle with `M`)
 
 ### Run
 
 ```bash
 npm start
 ```
+
+Then open `http://localhost:3000` in your browser.
 
 ### Controls
 
@@ -20,6 +23,4 @@ npm start
 - `w` or `Up Arrow`: rotate
 - `Space`: hard drop
 - `m`: toggle music on/off
-- `q` or `Ctrl+C`: quit
-
-The game includes a lightweight terminal bell melody (no extra dependencies). If your terminal supports bell sounds, you will hear a simple looping tune during gameplay.
+- `r`: restart after game over

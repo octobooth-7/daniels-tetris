@@ -2,8 +2,8 @@
   "name": "cli-tetris",
   "version": "1.0.0",
   "private": true,
-  "description": "Lightweight playable CLI Tetris game",
+  "description": "Lightweight playable UI Tetris game",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/server.js"
   }
 }

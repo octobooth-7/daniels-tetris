@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris UI</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="game-panel">
+        <h1>Tetris</h1>
+        <p class="subtitle">Lightweight browser UI version</p>
+        <canvas id="game" width="392" height="560" aria-label="Tetris game board"></canvas>
+      </section>
+      <aside class="side-panel">
+        <div class="card">
+          <h2>Status</h2>
+          <p>Score: <strong id="score">0</strong></p>
+          <p id="game-over" class="hidden">Game Over — press <kbd>R</kbd> to restart.</p>
+        </div>
+        <div class="card">
+          <h2>Controls</h2>
+          <p><kbd>A</kbd>/<kbd>←</kbd> Move left</p>
+          <p><kbd>D</kbd>/<kbd>→</kbd> Move right</p>
+          <p><kbd>S</kbd>/<kbd>↓</kbd> Soft drop</p>
+          <p><kbd>W</kbd>/<kbd>↑</kbd> Rotate</p>
+          <p><kbd>Space</kbd> Hard drop</p>
+          <p><kbd>M</kbd> Music on/off</p>
+          <p><kbd>R</kbd> Restart</p>
+        </div>
+        <div class="card">
+          <h2>Audio</h2>
+          <p id="music-status">Music: On</p>
+          <p class="hint">Audio starts on your first key press due to browser policy.</p>
+        </div>
+      </aside>
+    </main>
+    <script src="./game.js"></script>
+  </body>
+</html>
