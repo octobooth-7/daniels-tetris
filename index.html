@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browser Tetris</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="game-panel">
+        <h1>Browser Tetris</h1>
+        <canvas id="game" width="300" height="600" aria-label="Tetris board"></canvas>
+      </section>
+      <aside class="info-panel">
+        <p><strong>Score:</strong> <span id="score">0</span></p>
+        <p><strong>Lines:</strong> <span id="lines">0</span></p>
+        <p><strong>Status:</strong> <span id="status">Ready</span></p>
+        <button id="restart" type="button">Start / Restart</button>
+        <h2>Controls</h2>
+        <ul>
+          <li>← / → move</li>
+          <li>↑ rotate</li>
+          <li>↓ soft drop</li>
+          <li>Space hard drop</li>
+        </ul>
+      </aside>
+    </main>
+    <script type="module" src="src/game.js"></script>
+  </body>
+</html>
